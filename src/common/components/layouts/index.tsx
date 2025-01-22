@@ -10,7 +10,7 @@ const Layout = ({ children }: LayoutProps) => {
 		<div className='mx-auto max-w-6xl'>
 			<div className='flex flex-col'>
 				<Header />
-				<main>{children}</main>
+				<main className='flex-grow'>{children}</main>
 			</div>
 		</div>
 	);

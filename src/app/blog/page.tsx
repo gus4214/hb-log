@@ -1,5 +1,14 @@
+import Container from '@/common/components/elements/Container';
+import Blog from '@/modules/blog';
+
 const BlogPage = () => {
-	return <div>블로그</div>;
+	return (
+		<>
+			<Container>
+				<Blog />
+			</Container>
+		</>
+	);
 };
 
 export default BlogPage;

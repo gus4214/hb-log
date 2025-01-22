@@ -5,7 +5,7 @@ import Link from 'next/link';
 const Header = () => {
 	return (
 		<header>
-			<div className='container mx-auto flex items-center justify-between px-8 py-6'>
+			<div className='flex items-center justify-between px-8 py-6'>
 				{/* Logo */}
 				<Link href='/' aria-label='HB log - Homepage'>
 					<GradientText as='h1' className='text-2xl'>

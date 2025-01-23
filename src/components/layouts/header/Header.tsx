@@ -1,6 +1,7 @@
-import GradientText from '@/common/components/typography/GradientText';
-import { MENU_ITEMS } from '@/common/constant/menu';
 import Link from 'next/link';
+
+import GradientText from '@/components/ui/GradientText';
+import { MENU_ITEMS } from '@/config/menu';
 
 const Header = () => {
 	return (

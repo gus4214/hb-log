@@ -1,11 +1,12 @@
-import Header from '@/common/components/layouts/header/Header';
 import { ReactNode } from 'react';
+
+import Header from '@/components/layouts/header/Header';
 
 interface LayoutProps {
 	children: ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const MainLayout = ({ children }: LayoutProps) => {
 	return (
 		<div className='mx-auto max-w-6xl'>
 			<div className='flex flex-col'>
@@ -16,4 +17,4 @@ const Layout = ({ children }: LayoutProps) => {
 	);
 };
 
-export default Layout;
+export default MainLayout;

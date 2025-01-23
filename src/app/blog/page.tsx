@@ -1,4 +1,4 @@
-import Container from '@/common/components/elements/Container';
+import Container from '@/components/layouts/Container';
 import Blog from '@/modules/blog';
 
 const BlogPage = () => {

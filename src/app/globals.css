@@ -60,3 +60,17 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .border-grid {
+    @apply border-border/30 dark:border-border;
+  }
+
+  .container-wrapper {
+    @apply min-[1800px]:max-w-6xl min-[1800px]:border-x border-border/30 dark:border-border mx-auto w-full;
+  }
+
+  .container {
+    @apply px-8 mx-auto max-w-6xl;
+  }
+}

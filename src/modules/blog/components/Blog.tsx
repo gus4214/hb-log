@@ -1,12 +1,10 @@
-import BlogBanner from '@/modules/blog/components/BlogBanner';
 import BlogPostCard from '@/modules/blog/components/BlogPostCard';
 
 const Blog = () => {
 	return (
 		<>
-			<BlogBanner src='/sample.png' title='블로그 제목' subTitle='블로그 서브 타이틀 또는 설명' />
 			{/* 블로그 포스팅 리스트 */}
-			<section className='mt-12 flex flex-col gap-12'>
+			<section className='flex flex-col gap-6'>
 				<header>
 					<h5 className='text-lg'>총 50개의 포스트가 있어요.</h5>
 				</header>

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body>
+			<body className='min-h-svh bg-background font-sans antialiased'>
 				<ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
 					<MainLayout>{children}</MainLayout>
 				</ThemeProvider>

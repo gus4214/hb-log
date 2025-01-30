@@ -1,6 +1,9 @@
-import type { Metadata } from 'next';
 import './globals.css';
-import Layout from '@/common/components/layouts';
+
+import type { Metadata } from 'next';
+
+import MainLayout from '@/components/layouts/MainLayout';
+import { ThemeProvider } from '@/components/provider/ThemeProvider';
 
 export const metadata: Metadata = {
 	title: 'HB log',
@@ -11,7 +14,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body>
-				<Layout>{children}</Layout>
+				<ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
+					<MainLayout>{children}</MainLayout>
+				</ThemeProvider>
 			</body>
 		</html>
 	);

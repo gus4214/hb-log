@@ -1,5 +1,11 @@
+import Blog from '@/modules/blog';
+
 const BlogPage = () => {
-	return <div>블로그</div>;
+	return (
+		<>
+			<Blog />
+		</>
+	);
 };
 
 export default BlogPage;

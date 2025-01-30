@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
+import ThemeSwitcher from '@/components/layouts/header/ThemeSwitcher';
 import GradientText from '@/components/ui/GradientText';
-import { MENU_ITEMS } from '@/config/menu';
 
 const Header = () => {
 	return (
@@ -14,18 +14,9 @@ const Header = () => {
 							HB log
 						</GradientText>
 					</Link>
-					{/* Navigation */}
-					<nav aria-label='Main Navigation'>
-						<ul className='flex items-center gap-5'>
-							{MENU_ITEMS.map((menu, index) => (
-								<li key={index}>
-									<Link href={menu.href} className='text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'>
-										{menu.title}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
+					{/* TODO: 네비바는 MVP 제외로 우선 주석 처리 */}
+					{/* <MainNavBar /> */}
+					<ThemeSwitcher />
 				</div>
 			</div>
 		</header>

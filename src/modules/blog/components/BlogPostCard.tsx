@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FC } from 'react';
 
-import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/shadcn/card';
 
 interface BlogPostCardProps {
 	src: string;

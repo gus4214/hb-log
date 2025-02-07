@@ -3,7 +3,7 @@ import { Client } from '@notionhq/client';
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
 // 블로그 글 목록 가져오기
-export async function getBlogPosts(category: '' | 'essay' | 'tech') {
+export async function getBlogPosts(category?: 'essay' | 'tech') {
 	if (!process.env.NOTION_DATABASE_ID) {
 		throw new Error('Missing Notion Database ID');
 	}
@@ -14,7 +14,7 @@ export async function getBlogPosts(category: '' | 'essay' | 'tech') {
 		filter: {
 			property: 'category',
 			select: {
-				equals: category,
+				equals: category || '',
 			},
 		},
 	});

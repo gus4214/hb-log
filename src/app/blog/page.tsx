@@ -2,7 +2,7 @@ import { getBlogPosts } from '@/lib/notion';
 import Blog from '@/modules/blog';
 
 const BlogPage = async () => {
-	const posts = await getBlogPosts('');
+	const posts = await getBlogPosts();
 
 	return (
 		<>
@@ -12,3 +12,4 @@ const BlogPage = async () => {
 };
 
 export default BlogPage;
+export const dynamic = 'force-static';

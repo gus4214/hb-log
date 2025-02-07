@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FC } from 'react';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/shadcn/tabs';
+import BlogCategoryTab from '@/modules/blog/components/BlogCategoryTab';
 
 interface BlogBannerProps {
 	src: string;
@@ -24,13 +24,7 @@ const BlogBanner: FC<BlogBannerProps> = ({ src, title, subTitle }) => {
 							<h1 className='text-2xl md:text-4xl font-bold'>{title}</h1>
 							<p className='text-sm md:text-base'>{subTitle}</p>
 						</div>
-						<Tabs defaultValue='all' className='w-[400px]'>
-							<TabsList>
-								<TabsTrigger value='all'>전체</TabsTrigger>
-								<TabsTrigger value='tech'>개발</TabsTrigger>
-								<TabsTrigger value='essay'>에세이</TabsTrigger>
-							</TabsList>
-						</Tabs>
+						<BlogCategoryTab />
 					</div>
 				</div>
 			</div>

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/shadcn/tabs';
-import { BLOG_CATEGORIES } from '@/config/blog';
+import { BLOG_CATEGORIES_TAB } from '@/config/blog';
 import { useSegmentPath } from '@/hooks/useSegmentPath';
 
 const BlogCategoryTab = () => {
@@ -12,7 +12,7 @@ const BlogCategoryTab = () => {
 	return (
 		<Tabs defaultValue={segmentPath}>
 			<TabsList>
-				{BLOG_CATEGORIES.map((category) => (
+				{BLOG_CATEGORIES_TAB.map((category) => (
 					<Link key={category.value} href={category.href}>
 						<TabsTrigger value={category.value}>{category.label}</TabsTrigger>
 					</Link>

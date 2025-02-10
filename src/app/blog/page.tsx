@@ -1,15 +1,14 @@
-import { getBlogPosts } from '@/lib/notion';
 import Blog from '@/modules/blog';
+import { getBlogPosts } from '@/services/blog';
 
 const BlogPage = async () => {
 	const posts = await getBlogPosts();
 
 	return (
 		<>
-			<Blog />
+			<Blog posts={posts} />
 		</>
 	);
 };
 
 export default BlogPage;
-export const dynamic = 'force-static';

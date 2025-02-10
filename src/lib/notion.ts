@@ -1,23 +1,54 @@
-import { Client } from '@notionhq/client';
+import { RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints';
 
-const notion = new Client({ auth: process.env.NOTION_TOKEN });
+type DateResponse = {
+	start: string;
+	end: string | null;
+	time_zone: string | null;
+};
 
-// 블로그 글 목록 가져오기
-export async function getBlogPosts(category?: 'essay' | 'tech') {
-	if (!process.env.NOTION_DATABASE_ID) {
-		throw new Error('Missing Notion Database ID');
+type SelectColor = 'default' | 'gray' | 'brown' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'pink' | 'red';
+type PartialSelectResponse = {
+	id: string;
+	name: string;
+	color: SelectColor;
+};
+
+export type NotionProperty =
+	| {
+			type: 'title';
+			title: Array<RichTextItemResponse>;
+			id: string;
+	  }
+	| {
+			type: 'rich_text';
+			rich_text: Array<RichTextItemResponse>;
+			id: string;
+	  }
+	| {
+			type: 'select';
+			select: PartialSelectResponse | null;
+			id: string;
+	  }
+	| {
+			type: 'date';
+			date: DateResponse | null;
+			id: string;
+	  };
+
+export function extractProperty(property: NotionProperty) {
+	if (!property) {
+		return '';
 	}
-
-	const response = await notion.databases.query({
-		database_id: process.env.NOTION_DATABASE_ID,
-		// 정렬, 필터 등 옵션을 추가 가능
-		filter: {
-			property: 'category',
-			select: {
-				equals: category || '',
-			},
-		},
-	});
-
-	return response.results;
+	switch (property.type) {
+		case 'title':
+			return property.title[0].plain_text || '';
+		case 'rich_text':
+			return property.rich_text?.[0]?.plain_text || '';
+		case 'select':
+			return property.select?.name || '';
+		case 'date':
+			return property.date?.start || '';
+		default:
+			return '';
+	}
 }

@@ -1,9 +1,12 @@
 import Blog from '@/modules/blog';
+import { getBlogPosts } from '@/services/blog';
 
-const BlogPage = () => {
+const BlogPage = async () => {
+	const posts = await getBlogPosts();
+
 	return (
 		<>
-			<Blog />
+			<Blog posts={posts} />
 		</>
 	);
 };

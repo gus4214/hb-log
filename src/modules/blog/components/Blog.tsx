@@ -16,7 +16,14 @@ const Blog: FC<BlogProps> = ({ posts }) => {
 				</header>
 				<ul>
 					{posts.map((post) => (
-						<BlogPostCard key={post.id} id={post.id} title={post.title} description={post.description} category={post.category} date={post.date} />
+						<BlogPostCard
+							key={post.id}
+							slug={post.slug}
+							title={post.title}
+							description={post.description}
+							category={post.category}
+							date={post.date}
+						/>
 					))}
 				</ul>
 			</div>

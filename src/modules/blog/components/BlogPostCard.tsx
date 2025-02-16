@@ -1,13 +1,16 @@
+'use client';
+
+import Link from 'next/link';
 import { FC } from 'react';
 
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/shadcn/card';
 import { BlogItem } from '@/types/blog';
 
-type BlogPostCardProps = BlogItem;
+type BlogPostCardProps = Omit<BlogItem, 'id'>;
 
-const BlogPostCard: FC<BlogPostCardProps> = ({ title, category, description, date }) => {
+const BlogPostCard: FC<BlogPostCardProps> = ({ slug, title, category, description, date }) => {
 	return (
-		<>
+		<Link href={`/article/${slug}`} scroll={false}>
 			<Card className='overflow-hidden'>
 				{/* <div className='relative w-full h-52'>
 					<Image src={thumbnail} alt={title} layout='fill' objectFit='cover' />
@@ -19,7 +22,7 @@ const BlogPostCard: FC<BlogPostCardProps> = ({ title, category, description, dat
 					<CardDescription className='mt-2'>{date}</CardDescription>
 				</CardContent>
 			</Card>
-		</>
+		</Link>
 	);
 };
 

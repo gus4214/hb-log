@@ -1,5 +1,5 @@
 import { Client } from '@notionhq/client';
-import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { BlockObjectResponse, GetPageResponse, PartialBlockObjectResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 import { extractProperty, NotionProperty } from '@/lib/notion';
 import { BlogCategory, BlogItem } from '@/types/blog';
@@ -38,6 +38,7 @@ export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): B
 
 		return {
 			id: page.id,
+			slug: extractProperty(properties.slug),
 			title: extractProperty(properties.title),
 			description: extractProperty(properties.description),
 			category: extractProperty(properties.category) as BlogCategory,
@@ -52,4 +53,52 @@ export const getBlogPosts = async (category?: BlogCategory): Promise<BlogItem[]>
 	const response = await getNotionBlogApi(category);
 
 	return mapNotionResponseToBlogItems(response);
+};
+
+export const getPageIdFromSlug = async (slug: string): Promise<string> => {
+	if (!NOTION_BLOG_API) {
+		throw new Error('Missing Notion Database ID');
+	}
+
+	const response = await notion.databases.query({
+		database_id: NOTION_BLOG_API,
+		filter: {
+			property: 'slug',
+			rich_text: {
+				equals: slug,
+			},
+		},
+	});
+
+	if (response.results.length === 0) {
+		throw new Error(`No page found for slug: ${slug}`);
+	}
+
+	return response.results[0].id;
+};
+
+export const getBlogPostDetail = async (slug: string) => {
+	const pageId = await getPageIdFromSlug(slug);
+	return await getNotionBlogDetail(pageId);
+};
+
+export const getNotionBlogDetail = async (
+	pageId: string
+): Promise<{
+	page: GetPageResponse;
+	blocks: (PartialBlockObjectResponse | BlockObjectResponse)[];
+}> => {
+	// 페이지 메타데이터 조회
+	const page = await notion.pages.retrieve({ page_id: pageId });
+
+	// 페이지 콘텐츠 블록 조회 (한 번에 최대 100개, 필요한 경우 pagination 고려)
+	const blocksResponse = await notion.blocks.children.list({
+		block_id: pageId,
+		page_size: 100,
+	});
+
+	return {
+		page,
+		blocks: blocksResponse.results,
+	};
 };

@@ -8,3 +8,5 @@ export interface BlogItem {
 	category: BlogCategory;
 	date: string;
 }
+
+export type ArticleHeaderInfo = Pick<BlogItem, 'title' | 'description' | 'date'>;

@@ -1,31 +1,13 @@
-import { Client } from '@notionhq/client';
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 import { extractProperty, NotionProperty } from '@/lib/notion';
-import { BlogCategory, BlogItem } from '@/types/blog';
+import { getBlogPageProperties, queryBlogDatabase } from '@/services/notion';
+import { ArticleHeaderInfo, BlogCategory, BlogItem } from '@/types/blog';
 
-const NOTION_BLOG_API = process.env.NOTION_DATABASE_BLOG_ID;
+export const getBlogPosts = async (category?: BlogCategory): Promise<BlogItem[]> => {
+	const response = await queryBlogDatabase(category || '');
 
-const notion = new Client({ auth: process.env.NOTION_TOKEN });
-
-// 노션 블로그 글 목록 가져오기
-export const getNotionBlogApi = async (category?: BlogCategory): Promise<QueryDatabaseResponse> => {
-	if (!NOTION_BLOG_API) {
-		throw new Error('Missing Notion Database ID');
-	}
-
-	const response = await notion.databases.query({
-		database_id: NOTION_BLOG_API,
-		// 정렬, 필터 등 옵션을 추가 가능
-		filter: {
-			property: 'category',
-			select: {
-				equals: category || '',
-			},
-		},
-	});
-
-	return response;
+	return mapNotionResponseToBlogItems(response);
 };
 
 export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): BlogItem[] {
@@ -38,6 +20,7 @@ export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): B
 
 		return {
 			id: page.id,
+			slug: extractProperty(properties.slug),
 			title: extractProperty(properties.title),
 			description: extractProperty(properties.description),
 			category: extractProperty(properties.category) as BlogCategory,
@@ -48,8 +31,12 @@ export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): B
 	return posts;
 }
 
-export const getBlogPosts = async (category?: BlogCategory): Promise<BlogItem[]> => {
-	const response = await getNotionBlogApi(category);
+export const getBlogArticleHeaderInfo = async (slug: string): Promise<ArticleHeaderInfo> => {
+	const properties = await getBlogPageProperties(slug);
 
-	return mapNotionResponseToBlogItems(response);
+	return {
+		title: extractProperty(properties.title),
+		description: extractProperty(properties.description),
+		date: extractProperty(properties.date),
+	};
 };

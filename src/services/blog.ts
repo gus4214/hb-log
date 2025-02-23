@@ -11,7 +11,7 @@ export const getBlogPosts = async (category?: BlogCategory): Promise<BlogItem[]>
 };
 
 export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): BlogItem[] {
-	const posts = response.results.map((page) => {
+	const posts: BlogItem[] = response.results.map((page) => {
 		if (!('properties' in page)) {
 			throw new Error('Page does not have properties');
 		}
@@ -25,6 +25,7 @@ export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): B
 			description: extractProperty(properties.description),
 			category: extractProperty(properties.category) as BlogCategory,
 			date: extractProperty(properties.date),
+			thumbnail: extractProperty(properties.thumbnail),
 		};
 	});
 
@@ -38,5 +39,7 @@ export const getBlogArticleHeaderInfo = async (slug: string): Promise<ArticleHea
 		title: extractProperty(properties.title),
 		description: extractProperty(properties.description),
 		date: extractProperty(properties.date),
+		category: extractProperty(properties.category) as BlogCategory,
+		thumbnail: extractProperty(properties.thumbnail),
 	};
 };

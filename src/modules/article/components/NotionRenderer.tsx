@@ -27,14 +27,12 @@ interface NotionRendererProps {
 
 const NotionRenderer: FC<NotionRendererProps> = ({ recordMap }) => {
 	return (
-		<>
-			<_NotionRenderer
-				recordMap={recordMap}
-				darkMode
-				showTableOfContents
-				components={{ Code, Collection, Equation, Pdf, Modal, nextImage: Image, nextLink: Link }}
-			/>
-		</>
+		<_NotionRenderer
+			recordMap={recordMap}
+			darkMode
+			showTableOfContents
+			components={{ Code, Collection, Equation, Pdf, Modal, nextImage: Image, nextLink: Link }}
+		/>
 	);
 };
 

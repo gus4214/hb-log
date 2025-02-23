@@ -101,6 +101,10 @@ body {
   }
 
   .container {
-    @apply px-8 mx-auto max-w-6xl;
+    @apply px-6 mx-auto max-w-6xl;
+  }
+
+  .container-article {
+    @apply px-4 mx-auto max-w-[720px];
   }
 }

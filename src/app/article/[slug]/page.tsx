@@ -6,11 +6,7 @@ const ArticlePage = async ({ params }: { params: Promise<{ slug: string }> }) =>
 
 	const recordMap = await getRecordMapForRenderer(slug);
 
-	return (
-		<>
-			<Article recordMap={recordMap} />
-		</>
-	);
+	return <Article recordMap={recordMap} />;
 };
 
 export default ArticlePage;

@@ -6,7 +6,7 @@ import { FC } from 'react';
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { BlogItem } from '@/types/blog';
 
-type BlogPostCardProps = Omit<BlogItem, 'id'>;
+type BlogPostCardProps = Omit<BlogItem, 'id' | 'thumbnail'>;
 
 const BlogPostCard: FC<BlogPostCardProps> = ({ slug, title, category, description, date }) => {
 	return (

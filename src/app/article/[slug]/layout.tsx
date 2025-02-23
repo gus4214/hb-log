@@ -1,16 +1,24 @@
 import { ReactNode } from 'react';
 
-import ArticleBanner from '@/modules/article/components/ArticleBanner';
+import { PageHeaderDescription, PageHeaderHeading, PageImageHeader, PageImageHeaderContent } from '@/components/ui/page-header';
+import { SITE_CONFIG } from '@/config/site';
+import ArticleMetaInfo from '@/modules/article/components/ArticleMetaInfo';
 import { getBlogArticleHeaderInfo, getBlogPosts } from '@/services/blog';
 
 const ArticlePageLayout = async ({ children, params }: { children: ReactNode; params: Promise<{ slug: string }> }) => {
 	const { slug } = await params;
-	const { title, description, date } = await getBlogArticleHeaderInfo(slug);
+	const { title, description, date, category, thumbnail } = await getBlogArticleHeaderInfo(slug);
 
 	return (
 		<>
-			<ArticleBanner />
-			<main className='mt-10'>{children}</main>
+			<PageImageHeader src={thumbnail || SITE_CONFIG.blog.bannerImage}>
+				<PageImageHeaderContent className='container-article'>
+					<ArticleMetaInfo category={category} date={date} />
+					<PageHeaderHeading>{title}</PageHeaderHeading>
+					<PageHeaderDescription>{description}</PageHeaderDescription>
+				</PageImageHeaderContent>
+			</PageImageHeader>
+			<>{children}</>
 		</>
 	);
 };

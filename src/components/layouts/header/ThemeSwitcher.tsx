@@ -4,7 +4,7 @@ import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useCallback } from 'react';
 
-import { Button } from '@/components/ui/shadcn/button';
+import { Button } from '@/components/ui/button';
 
 const ThemeSwitcher = () => {
 	const { setTheme, resolvedTheme } = useTheme();

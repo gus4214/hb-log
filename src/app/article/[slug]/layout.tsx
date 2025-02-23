@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import ArticleBanner from '@/modules/article/components/ArticleBanner';
 import { getBlogArticleHeaderInfo, getBlogPosts } from '@/services/blog';
 
 const ArticlePageLayout = async ({ children, params }: { children: ReactNode; params: Promise<{ slug: string }> }) => {
@@ -8,8 +9,8 @@ const ArticlePageLayout = async ({ children, params }: { children: ReactNode; pa
 
 	return (
 		<>
-			<header>블로그 제목, 날짜 등 배치</header>
-			<section>{children}</section>
+			<ArticleBanner />
+			<main className='mt-10'>{children}</main>
 		</>
 	);
 };

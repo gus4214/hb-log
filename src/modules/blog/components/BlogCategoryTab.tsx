@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/shadcn/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BLOG_CATEGORIES_TAB } from '@/config/blog';
 import { useSegmentPath } from '@/hooks/useSegmentPath';
 

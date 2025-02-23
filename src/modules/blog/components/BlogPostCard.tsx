@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { FC } from 'react';
 
-import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/shadcn/card';
+import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 import { BlogItem } from '@/types/blog';
 
 type BlogPostCardProps = Omit<BlogItem, 'id'>;

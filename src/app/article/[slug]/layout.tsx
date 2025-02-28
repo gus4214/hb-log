@@ -18,7 +18,7 @@ const ArticlePageLayout = async ({ children, params }: { children: ReactNode; pa
 					<PageHeaderDescription>{description}</PageHeaderDescription>
 				</PageImageHeaderContent>
 			</PageImageHeader>
-			<>{children}</>
+			<div className='my-20'>{children}</div>
 		</>
 	);
 };

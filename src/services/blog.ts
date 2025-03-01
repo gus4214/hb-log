@@ -1,5 +1,6 @@
 import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
+import { generateRemoteBlurDataURL } from '@/lib/imagePlaceholder';
 import { extractProperty, NotionProperty } from '@/lib/notion';
 import { getBlogPageProperties, queryBlogDatabase } from '@/services/notion';
 import { ArticleHeaderInfo, BlogCategory, BlogItem } from '@/types/blog';
@@ -10,24 +11,29 @@ export const getBlogPosts = async (category?: BlogCategory): Promise<BlogItem[]>
 	return mapNotionResponseToBlogItems(response);
 };
 
-export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): BlogItem[] {
-	const posts: BlogItem[] = response.results.map((page) => {
-		if (!('properties' in page)) {
-			throw new Error('Page does not have properties');
-		}
+export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): Promise<BlogItem[]> {
+	const posts: Promise<BlogItem[]> = Promise.all(
+		response.results.map(async (page) => {
+			if (!('properties' in page)) {
+				throw new Error('Page does not have properties');
+			}
 
-		const properties = page.properties as Record<string, NotionProperty>;
+			const properties = page.properties as Record<string, NotionProperty>;
+			const thumbnail = extractProperty(properties.thumbnail);
+			const blurDataURL = await generateRemoteBlurDataURL(thumbnail);
 
-		return {
-			id: page.id,
-			slug: extractProperty(properties.slug),
-			title: extractProperty(properties.title),
-			description: extractProperty(properties.description),
-			category: extractProperty(properties.category) as BlogCategory,
-			date: extractProperty(properties.date),
-			thumbnail: extractProperty(properties.thumbnail),
-		};
-	});
+			return {
+				id: page.id,
+				slug: extractProperty(properties.slug),
+				title: extractProperty(properties.title),
+				description: extractProperty(properties.description),
+				category: extractProperty(properties.category) as BlogCategory,
+				date: extractProperty(properties.date),
+				thumbnail,
+				blurDataURL,
+			};
+		})
+	);
 
 	return posts;
 }
@@ -35,11 +41,15 @@ export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): B
 export const getBlogArticleHeaderInfo = async (slug: string): Promise<ArticleHeaderInfo> => {
 	const properties = await getBlogPageProperties(slug);
 
+	const thumbnail = extractProperty(properties.thumbnail);
+	const blurDataURL = await generateRemoteBlurDataURL(thumbnail);
+
 	return {
 		title: extractProperty(properties.title),
 		description: extractProperty(properties.description),
 		date: extractProperty(properties.date),
 		category: extractProperty(properties.category) as BlogCategory,
-		thumbnail: extractProperty(properties.thumbnail),
+		thumbnail,
+		blurDataURL,
 	};
 };

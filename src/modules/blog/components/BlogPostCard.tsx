@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
@@ -9,7 +7,7 @@ import { BlogItem } from '@/types/blog';
 
 type BlogPostCardProps = Omit<BlogItem, 'id'>;
 
-const BlogPostCard: FC<BlogPostCardProps> = ({ slug, title, category, description, date, thumbnail }) => {
+const BlogPostCard: FC<BlogPostCardProps> = async ({ slug, title, category, description, date, thumbnail, blurDataURL }) => {
 	return (
 		<Link href={`/article/${slug}`} scroll={false} className='flex w-full py-8 group'>
 			<div className='relative overflow-hidden w-32 h-20 rounded-lg'>
@@ -18,6 +16,8 @@ const BlogPostCard: FC<BlogPostCardProps> = ({ slug, title, category, descriptio
 					alt='thumbnail'
 					layout='fill'
 					objectFit='cover'
+					placeholder='blur'
+					blurDataURL={blurDataURL}
 					className='transition-all duration-300 ease transform scale-100 group-hover:scale-110'
 				/>
 			</div>

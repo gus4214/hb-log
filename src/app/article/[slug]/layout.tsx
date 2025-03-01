@@ -1,23 +1,23 @@
 import { ReactNode } from 'react';
 
-import { PageHeaderDescription, PageHeaderHeading, PageImageHeaderContent, PageRemoteImageHeader } from '@/components/ui/page-header';
+import { PageHeaderDescription, PageHeaderHeading, PageImageHeader, PageImageHeaderContent } from '@/components/ui/page-header';
 import { SITE_CONFIG } from '@/config/site';
 import ArticleMetaInfo from '@/modules/article/components/ArticleMetaInfo';
 import { getBlogArticleHeaderInfo, getBlogPosts } from '@/services/blog';
 
 const ArticlePageLayout = async ({ children, params }: { children: ReactNode; params: Promise<{ slug: string }> }) => {
 	const { slug } = await params;
-	const { title, description, date, category, thumbnail } = await getBlogArticleHeaderInfo(slug);
+	const { title, description, date, category, thumbnail, blurDataURL } = await getBlogArticleHeaderInfo(slug);
 
 	return (
 		<>
-			<PageRemoteImageHeader src={thumbnail || SITE_CONFIG.blog.bannerImage}>
+			<PageImageHeader src={thumbnail || SITE_CONFIG.blog.bannerImage} blurDataURL={blurDataURL} imageClassName='filter brightness-50'>
 				<PageImageHeaderContent className='container-article'>
 					<ArticleMetaInfo category={category} date={date} />
 					<PageHeaderHeading>{title}</PageHeaderHeading>
 					<PageHeaderDescription>{description}</PageHeaderDescription>
 				</PageImageHeaderContent>
-			</PageRemoteImageHeader>
+			</PageImageHeader>
 			<div className='my-20'>{children}</div>
 		</>
 	);

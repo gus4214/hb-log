@@ -8,6 +8,7 @@ export interface BlogItem {
 	category: BlogCategory;
 	date: string;
 	thumbnail: string;
+	blurDataURL: string;
 }
 
 export type ArticleHeaderInfo = Omit<BlogItem, 'id' | 'slug'>;

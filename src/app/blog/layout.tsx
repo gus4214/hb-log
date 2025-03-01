@@ -7,7 +7,7 @@ import BlogCategoryTab from '@/modules/blog/components/BlogCategoryTab';
 const BlogPageLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<>
-			<PageImageHeader src={SITE_CONFIG.blog.bannerImage}>
+			<PageImageHeader src={SITE_CONFIG.blog.bannerImage} imageBlackShadow>
 				<PageImageHeaderContent>
 					<PageHeaderHeading>{SITE_CONFIG.blog.title}</PageHeaderHeading>
 					<PageHeaderDescription>{SITE_CONFIG.blog.description}</PageHeaderDescription>

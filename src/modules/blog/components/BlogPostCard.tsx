@@ -9,7 +9,7 @@ type BlogPostCardProps = Omit<BlogItem, 'id'>;
 
 const BlogPostCard: FC<BlogPostCardProps> = async ({ slug, title, category, description, date, thumbnail, blurDataURL }) => {
 	return (
-		<Link href={`/article/${slug}`} scroll={false} className='flex w-full py-8 group'>
+		<Link href={`/article/${slug}`} className='flex w-full py-8 group'>
 			<div className='relative overflow-hidden w-32 h-20 rounded-lg'>
 				<Image
 					src={thumbnail}

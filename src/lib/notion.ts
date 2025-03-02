@@ -33,6 +33,18 @@ export type NotionProperty =
 			type: 'date';
 			date: DateResponse | null;
 			id: string;
+	  }
+	| {
+			type: 'files';
+			files: Array<{
+				file: {
+					url: string;
+					expiry_time: string;
+				};
+				name: string;
+				type?: 'file';
+			}>;
+			id: string;
 	  };
 
 export function extractProperty(property: NotionProperty) {
@@ -48,6 +60,8 @@ export function extractProperty(property: NotionProperty) {
 			return property.select?.name || '';
 		case 'date':
 			return property.date?.start || '';
+		case 'files':
+			return property.files[0]?.file.url;
 		default:
 			return '';
 	}

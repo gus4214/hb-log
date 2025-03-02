@@ -1,16 +1,24 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-import BlogBanner from '@/modules/blog/components/BlogBanner';
+import { PageActions, PageHeaderDescription, PageHeaderHeading, PageImageHeader, PageImageHeaderContent } from '@/components/ui/page-header';
+import { SITE_CONFIG } from '@/config/site';
+import BlogCategoryTab from '@/modules/blog/components/BlogCategoryTab';
 
 const BlogPageLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<>
-			<BlogBanner src='/sample.png' title='블로그 제목' subTitle='블로그 서브 타이틀 또는 설명' />
-			<div className='container-wrapper'>
-				<div className='container py-10'>
-					<section id='blog'>{children}</section>
-				</div>
-			</div>
+			<PageImageHeader src={SITE_CONFIG.blog.bannerImage} imageBlackShadow>
+				<PageImageHeaderContent>
+					<PageHeaderHeading>{SITE_CONFIG.blog.title}</PageHeaderHeading>
+					<PageHeaderDescription>{SITE_CONFIG.blog.description}</PageHeaderDescription>
+					<PageActions>
+						<BlogCategoryTab />
+					</PageActions>
+				</PageImageHeaderContent>
+			</PageImageHeader>
+			<main id='blog' className='container py-10'>
+				{children}
+			</main>
 		</>
 	);
 };

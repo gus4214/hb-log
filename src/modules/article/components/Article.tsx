@@ -4,9 +4,9 @@ import NotionRenderer from '@/modules/article/components/NotionRenderer';
 
 const Article = ({ recordMap }: { recordMap: ExtendedRecordMap }) => {
 	return (
-		<>
+		<div>
 			<NotionRenderer recordMap={recordMap} />
-		</>
+		</div>
 	);
 };
 

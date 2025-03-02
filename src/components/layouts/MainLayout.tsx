@@ -10,7 +10,7 @@ const MainLayout = ({ children }: LayoutProps) => {
 	return (
 		<div className='flex flex-1 flex-col'>
 			<Header />
-			<main className='flex flex-1 flex-col'>{children}</main>
+			<div className='flex flex-1 flex-col'>{children}</div>
 		</div>
 	);
 };

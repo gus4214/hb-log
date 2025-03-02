@@ -97,10 +97,14 @@ body {
   }
 
   .container-wrapper {
-    @apply min-[1800px]:max-w-6xl min-[1800px]:border-x border-border/30 dark:border-border mx-auto w-full;
+    @apply min-[1800px]:max-w-6xl border-border/30 dark:border-border mx-auto w-full;
   }
 
   .container {
-    @apply px-8 mx-auto max-w-6xl;
+    @apply px-6 mx-auto max-w-6xl;
+  }
+
+  .container-article {
+    @apply px-4 mx-auto max-w-[720px];
   }
 }

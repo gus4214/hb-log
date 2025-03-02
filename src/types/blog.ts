@@ -7,6 +7,8 @@ export interface BlogItem {
 	description: string;
 	category: BlogCategory;
 	date: string;
+	thumbnail: string;
+	blurDataURL: string;
 }
 
-export type ArticleHeaderInfo = Pick<BlogItem, 'title' | 'description' | 'date'>;
+export type ArticleHeaderInfo = Omit<BlogItem, 'id' | 'slug'>;

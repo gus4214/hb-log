@@ -15,7 +15,6 @@ import { NotionRenderer as _NotionRenderer } from 'react-notion-x';
 import { useIsMounted } from '@/hooks/useIsMounted';
 
 const Code = dynamic(() => import('react-notion-x/build/third-party/code').then((m) => m.Code));
-const Collection = dynamic(() => import('react-notion-x/build/third-party/collection').then((m) => m.Collection));
 const Equation = dynamic(() => import('react-notion-x/build/third-party/equation').then((m) => m.Equation));
 
 interface NotionRendererProps {
@@ -35,7 +34,7 @@ const NotionRenderer: FC<NotionRendererProps> = ({ recordMap }) => {
 			recordMap={recordMap}
 			showTableOfContents
 			previewImages
-			components={{ Code, Collection, Equation, nextImage: Image, nextLink: Link }}
+			components={{ Code, Equation, nextImage: Image, nextLink: Link }}
 		/>
 	);
 };

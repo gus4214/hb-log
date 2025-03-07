@@ -6,8 +6,13 @@ import MainLayout from '@/components/layouts/MainLayout';
 import { ThemeProvider } from '@/components/provider/ThemeProvider';
 
 export const metadata: Metadata = {
-	title: 'HB log',
+	title: 'HB Log',
 	description: 'Personal WebSite',
+	icons: {
+		icon: '/favicon/favicon.ico',
+		shortcut: '/favicon/favicon-16x16.png',
+		apple: '/favicon/apple-touch-icon.png',
+	},
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

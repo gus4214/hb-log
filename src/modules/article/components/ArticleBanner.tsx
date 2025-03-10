@@ -24,8 +24,9 @@ const ArticleBanner: FC<ArticleBannerProps> = ({ title, description, date, categ
 				alt='배너 이미지'
 				layout='fill'
 				objectFit='cover'
-				quality={100}
+				quality={80}
 				priority
+				loading='eager'
 				placeholder='blur'
 				blurDataURL={blurDataURL}
 				className={`transition-all duration-1000 ease-in-out ${isLoaded ? 'brightness-50' : 'brightness-90'}`}

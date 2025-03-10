@@ -1,8 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 
 import { PageHeaderContent, PageHeaderDescription, PageHeaderHeading } from '@/components/ui/page-header';
 import { SITE_CONFIG } from '@/config/site';
@@ -12,13 +11,9 @@ import { ArticleHeaderInfo } from '@/types/blog';
 type ArticleBannerProps = ArticleHeaderInfo;
 
 const ArticleBanner: FC<ArticleBannerProps> = ({ title, description, date, category, thumbnail, blurDataURL }) => {
+	const [isLoaded, setIsLoaded] = useState(false);
 	return (
-		<motion.header
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			transition={{ duration: 0.5 }}
-			className='relative h-[420px] md:h-[520px] -mt-14'
-		>
+		<header className='relative h-[420px] md:h-[520px] -mt-14'>
 			<PageHeaderContent className='container-article'>
 				<ArticleMetaInfo category={category} date={date} />
 				<PageHeaderHeading>{title}</PageHeaderHeading>
@@ -33,9 +28,10 @@ const ArticleBanner: FC<ArticleBannerProps> = ({ title, description, date, categ
 				priority
 				placeholder='blur'
 				blurDataURL={blurDataURL}
-				className='brightness-50'
+				className={`transition-all duration-1000 ease-in-out ${isLoaded ? 'brightness-50' : 'brightness-90'}`}
+				onLoadingComplete={() => setIsLoaded(true)}
 			/>
-		</motion.header>
+		</header>
 	);
 };
 

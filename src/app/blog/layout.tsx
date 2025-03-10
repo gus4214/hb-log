@@ -1,21 +1,11 @@
 import { ReactNode } from 'react';
 
-import { PageActions, PageHeaderDescription, PageHeaderHeading, PageImageHeader, PageImageHeaderContent } from '@/components/ui/page-header';
-import { SITE_CONFIG } from '@/config/site';
-import BlogCategoryTab from '@/modules/blog/components/BlogCategoryTab';
+import BlogBanner from '@/modules/blog/components/BlogBanner';
 
 const BlogPageLayout = ({ children }: { children: ReactNode }) => {
 	return (
 		<>
-			<PageImageHeader src={SITE_CONFIG.blog.bannerImage} imageBlackShadow>
-				<PageImageHeaderContent>
-					<PageHeaderHeading>{SITE_CONFIG.blog.title}</PageHeaderHeading>
-					<PageHeaderDescription>{SITE_CONFIG.blog.description}</PageHeaderDescription>
-					<PageActions>
-						<BlogCategoryTab />
-					</PageActions>
-				</PageImageHeaderContent>
-			</PageImageHeader>
+			<BlogBanner />
 			<main id='blog' className='container py-10'>
 				{children}
 			</main>

@@ -37,7 +37,7 @@ async function PageImageHeader({
 		</header>
 	);
 }
-function PageImageHeaderContent({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+function PageHeaderContent({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
 	return (
 		<div className='relative z-10 mt-14'>
 			<div className={cn('container flex flex-col items-start gap-2 py-8 md:py-10 mt-44', className)} {...props}>
@@ -59,4 +59,4 @@ function PageActions({ className, ...props }: React.HTMLAttributes<HTMLDivElemen
 	return <div className={cn('flex w-full items-center justify-start gap-2 pt-4', className)} {...props} />;
 }
 
-export { PageActions, PageHeader, PageHeaderDescription, PageHeaderHeading, PageImageHeader, PageImageHeaderContent };
+export { PageActions, PageHeader, PageHeaderContent, PageHeaderDescription, PageHeaderHeading, PageImageHeader };

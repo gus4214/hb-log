@@ -1,5 +1,7 @@
 import './globals.css';
 
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 
 import MainLayout from '@/components/layouts/MainLayout';
@@ -22,6 +24,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 				<ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
 					<MainLayout>{children}</MainLayout>
 				</ThemeProvider>
+				<SpeedInsights />
+				<Analytics />
 			</body>
 		</html>
 	);

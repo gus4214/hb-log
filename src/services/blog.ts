@@ -1,4 +1,4 @@
-import { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
+import { DatabaseObjectResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
 import { generateRemoteBlurDataURL } from '@/lib/imagePlaceholder';
 import { extractProperty, NotionProperty } from '@/lib/notion';
@@ -19,7 +19,9 @@ export function mapNotionResponseToBlogItems(response: QueryDatabaseResponse): P
 			}
 
 			const properties = page.properties as Record<string, NotionProperty>;
-			const thumbnail = extractProperty(properties.thumbnail);
+			// const thumbnail = extractProperty(properties.thumbnail);
+			const cover = (page as DatabaseObjectResponse).cover as { type: 'file'; file: { url: string; expiry_time: string } };
+			const thumbnail = cover.file.url;
 			const blurDataURL = await generateRemoteBlurDataURL(thumbnail);
 
 			return {

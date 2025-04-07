@@ -13,13 +13,13 @@ type ArticleBannerProps = ArticleHeaderInfo;
 const ArticleBanner: FC<ArticleBannerProps> = ({ title, description, date, category, thumbnail, blurDataURL }) => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	return (
-		<header className='relative h-[420px] md:h-[520px] -mt-14'>
+		<header className='-mt-14'>
 			<PageHeaderContent className='container-article'>
 				<ArticleMetaInfo category={category} date={date} />
 				<PageHeaderHeading>{title}</PageHeaderHeading>
 				<PageHeaderDescription>{description}</PageHeaderDescription>
 			</PageHeaderContent>
-			<Image
+			{/* <Image
 				src={thumbnail || SITE_CONFIG.blog.bannerImage}
 				alt='배너 이미지'
 				layout='fill'
@@ -31,7 +31,7 @@ const ArticleBanner: FC<ArticleBannerProps> = ({ title, description, date, categ
 				blurDataURL={blurDataURL}
 				className={`transition-all duration-1000 ease-in-out ${isLoaded ? 'brightness-50' : 'brightness-90'}`}
 				onLoadingComplete={() => setIsLoaded(true)}
-			/>
+			/> */}
 		</header>
 	);
 };

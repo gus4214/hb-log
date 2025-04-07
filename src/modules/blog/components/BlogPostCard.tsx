@@ -13,7 +13,7 @@ type BlogPostCardProps = Omit<BlogItem, 'id'>;
 const BlogPostCard: FC<BlogPostCardProps> = ({ slug, title, category, description, date, thumbnail, blurDataURL }) => {
 	return (
 		<Link href={`/article/${slug}`} className='flex w-full py-8 group'>
-			<motion.div
+			{/* <motion.div
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ duration: 0.5, ease: 'easeOut' }}
@@ -28,8 +28,8 @@ const BlogPostCard: FC<BlogPostCardProps> = ({ slug, title, category, descriptio
 					blurDataURL={blurDataURL}
 					className='transition-all duration-300 ease-in-out delay-0 scale-100 group-hover:scale-110'
 				/>
-			</motion.div>
-			<div className='flex flex-col gap-2 pl-5 w-[calc(100%-4rem)]'>
+			</motion.div> */}
+			<div className='flex flex-col gap-2 w-[calc(100%-4rem)]'>
 				<CardTitle>{title}</CardTitle>
 				<CardDescription className='transition-all duration-300 ease group-hover:text-black dark:group-hover:text-white'>
 					{description}

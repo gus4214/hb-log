@@ -15,6 +15,20 @@ const ArticlePageLayout = async ({ children, params }: { children: ReactNode; pa
 	);
 };
 
+export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }) => {
+	const { slug } = await params;
+	const articleHeaderInfo = await getBlogArticleHeaderInfo(slug);
+
+	return {
+		title: articleHeaderInfo.title,
+		description: `${articleHeaderInfo.description}`,
+		openGraph: {
+			title: articleHeaderInfo.title,
+			description: articleHeaderInfo.description,
+		},
+	};
+};
+
 export const generateStaticParams = async () => {
 	const posts = await getBlogPosts();
 

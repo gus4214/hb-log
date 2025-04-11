@@ -6,8 +6,8 @@ import Blog from '@/modules/blog';
 import { getBlogPosts } from '@/services/blog';
 import { BlogCategory } from '@/types/blog';
 
-export async function generateMetadata({ params }: { params: { category: BlogCategory } }): Promise<Metadata> {
-	const { category } = params;
+export async function generateMetadata({ params }: { params: Promise<{ category: BlogCategory }> }): Promise<Metadata> {
+	const { category } = await params;
 	const categoryTitle = category === 'tech' ? '개발' : '에세이';
 
 	return {

@@ -1,6 +1,6 @@
 export const SITE_CONFIG = {
 	name: 'HB',
-	url: 'https://hb-log.kr',
+	url: process.env.NEXT_PUBLIC_SITE_URL as string,
 	ogImage: '/images/og-image.png',
 	description: 'Unstoppable development story',
 	blog: {
